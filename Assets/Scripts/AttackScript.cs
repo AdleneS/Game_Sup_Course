@@ -16,6 +16,7 @@ public class AttackScript : MonoBehaviour {
             ContactPoint2D contact = collision.contacts[0];
             if (collision.contacts[0].collider.gameObject.tag == "Player")
             {
+                //Only allow down/right/left collision 
                 if (Vector2.Dot(contact.normal, Vector2.up) > 0.8f ||
                     Vector2.Dot(contact.normal, Vector2.left) > 0.8f ||
                     Vector2.Dot(contact.normal, Vector2.right) > 0.8f)

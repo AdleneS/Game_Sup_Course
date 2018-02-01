@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovablePlatform : MonoBehaviour
+public class Platform : MonoBehaviour
 
 {
     [Header("Platform Speed")]

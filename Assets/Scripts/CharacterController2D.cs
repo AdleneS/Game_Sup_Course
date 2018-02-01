@@ -13,13 +13,11 @@ public class CharacterController2D : MonoBehaviour
     public Vector3 m_footOffset;
     public LayerMask Mask;
 
-    //private AttackScript AS;
     private RaycastHit2D hit;
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        //AS = gameObject.GetComponent<AttackScript>();
     }
 
     void Update()
@@ -33,7 +31,6 @@ public class CharacterController2D : MonoBehaviour
     {
         CircleCast();
         IsAlive();
-        //KillEnemy();
     }
 
     void IsAlive()
