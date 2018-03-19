@@ -13,10 +13,12 @@ public class CharacterController2D : MonoBehaviour
     public Vector3 m_footOffset;
     public LayerMask Mask;
 
+    private Animator m_animator;
     private RaycastHit2D hit;
 
     void Start()
     {
+        m_animator = GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
@@ -24,12 +26,13 @@ public class CharacterController2D : MonoBehaviour
     {
         MyInput();
         OnAGround();
+        CircleCast();
+        m_animator.SetBool("IsGrounded", OnAGround());
 
     }
 
     void FixedUpdate()
     {
-        CircleCast();
         IsAlive();
     }
 
@@ -45,12 +48,15 @@ public class CharacterController2D : MonoBehaviour
         if (Input.GetButton("X_Axis"))
         {
             Movement(Input.GetAxis("X_Axis"));
+            m_animator.SetFloat("VelocityX",Input.GetAxis("X_Axis"));
         }
         if (Input.GetButtonUp("X_Axis"))
         {
             Movement(0);
+            m_animator.SetFloat("VelocityX", 0);
+
         }
-        if (Input.GetButtonDown("Jump") && OnAGround())
+        if (Input.GetButton("Jump") && OnAGround())
         {
             Jump();
         }
