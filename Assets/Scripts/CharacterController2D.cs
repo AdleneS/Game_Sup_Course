@@ -54,14 +54,20 @@ public class CharacterController2D : MonoBehaviour
         {
             Movement(0);
             m_animator.SetFloat("VelocityX", 0);
-
         }
         if (Input.GetButton("Jump") && OnAGround())
         {
             Jump();
         }
 
-
+        if (Input.GetAxis("X_Axis") >= 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
     }
 
     void Movement(float axis)

@@ -11,6 +11,9 @@ public class Platform : MonoBehaviour
     [Header("Platform Type")]
     public PlatformType PT;
 
+    public float m_bounceForce = 2;
+
+
     private int m_curWayPoint;
     private Rigidbody2D rb2d;
     private Vector3 m_target;
@@ -23,6 +26,8 @@ public class Platform : MonoBehaviour
     {
         public bool m_static;
         public bool m_movable;
+        public bool m_bounce;
+
     }
     private void Start()
     {
@@ -32,6 +37,24 @@ public class Platform : MonoBehaviour
     void FixedUpdate()
     {
         PlatformBehavior();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.contacts.Length > 0)
+        {
+            ContactPoint2D contact = collision.contacts[0];
+            if (collision.contacts[0].collider.gameObject.tag == "Player")
+            {
+                //Only allow down/right/left collision 
+                if (Vector2.Dot(contact.normal, Vector2.down) > 0.8f ||
+                    Vector2.Dot(contact.normal, Vector2.left) > 0.8f ||
+                    Vector2.Dot(contact.normal, Vector2.right) > 0.8f)
+                {
+                    collision.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,m_bounceForce), ForceMode2D.Impulse);
+                }
+            }
+        }
     }
 
     void PlatformBehavior()
