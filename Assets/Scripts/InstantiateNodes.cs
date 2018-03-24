@@ -61,7 +61,10 @@ public class InstantiateNodes : MonoBehaviour
         for (int i = 0; i < m_wayPoints.Count-1; i++)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawLine(m_wayPoints[i].transform.position, m_wayPoints[i + 1].transform.position);
+            if (m_wayPoints.Count > 0)
+            {
+                Gizmos.DrawLine(m_wayPoints[i].transform.position, m_wayPoints[i + 1].transform.position);
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114791309090989656}
   - component: {fileID: 114091813633697734}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1652542662921754}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.8876066, y: 0.042842627, z: 0.42893362}
+  m_LocalPosition: {x: 1.8533936, y: -0.64715743, z: 0.42893362}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4175008068721400}
@@ -107,8 +107,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.04753065}
-  m_Size: {x: 0.3162098, y: 0.5867815}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.3162098, y: 0.318573}
   m_Direction: 0
 --- !u!114 &114091813633697734
 MonoBehaviour:
@@ -123,10 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_node:
     prefab: {fileID: 4868429887868424, guid: ebeee2172d0f7654795c80eb800901ca, type: 2}
-    _nodeNumber: 2
-  m_wayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
+    _nodeNumber: 0
+  m_wayPoints: []
 --- !u!114 &114197592812229108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc7f24961102d44c839d3a3db8d076a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_gravity: -9.81
+  m_gravity: 0
 --- !u!114 &114692994385046890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,7 +204,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300004, guid: 7134a67c0b4b2264c84c3bfc188bdc10, type: 3}
+  m_Sprite: {fileID: 21300060, guid: 7134a67c0b4b2264c84c3bfc188bdc10, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

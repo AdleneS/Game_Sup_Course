@@ -13,6 +13,10 @@ public class Platform : MonoBehaviour
 
     public float m_bounceForce = 2;
 
+    [Header("Platform Renderer")]
+    public Sprite m_defaultPlatformSprite;
+    public Sprite m_movablePlatformSprite;
+    public Sprite m_bouncePlatformSprite;
 
     private int m_curWayPoint;
     private Rigidbody2D rb2d;
@@ -33,6 +37,20 @@ public class Platform : MonoBehaviour
     {
         IN = GetComponent<InstantiateNodes>();
         rb2d = GetComponent<Rigidbody2D>();
+        SpriteRenderer SR = GetComponent<SpriteRenderer>();
+
+        if (PT.m_bounce)
+        {
+            SR.sprite = m_bouncePlatformSprite;
+        }
+        else if (PT.m_movable)
+        {
+            SR.sprite = m_movablePlatformSprite;
+        }
+        else
+        {
+            SR.sprite = m_defaultPlatformSprite;
+        }
     }
     void FixedUpdate()
     {
@@ -41,17 +59,20 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.contacts.Length > 0)
+        if (PT.m_bounce)
         {
-            ContactPoint2D contact = collision.contacts[0];
-            if (collision.contacts[0].collider.gameObject.tag == "Player")
+            if (collision.contacts.Length > 0)
             {
-                //Only allow down/right/left collision 
-                if (Vector2.Dot(contact.normal, Vector2.down) > 0.8f ||
-                    Vector2.Dot(contact.normal, Vector2.left) > 0.8f ||
-                    Vector2.Dot(contact.normal, Vector2.right) > 0.8f)
+                ContactPoint2D contact = collision.contacts[0];
+                if (collision.contacts[0].collider.gameObject.tag == "Player")
                 {
-                    collision.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,m_bounceForce), ForceMode2D.Impulse);
+                    //Only allow down/right/left collision 
+                    if (Vector2.Dot(contact.normal, Vector2.down) > 0.8f ||
+                        Vector2.Dot(contact.normal, Vector2.left) > 0.8f ||
+                        Vector2.Dot(contact.normal, Vector2.right) > 0.8f)
+                    {
+                        collision.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, m_bounceForce), ForceMode2D.Impulse);
+                    }
                 }
             }
         }
@@ -65,6 +86,7 @@ public class Platform : MonoBehaviour
         }
         if (PT.m_movable)
         {
+
             if (m_curWayPoint < IN.m_wayPoints.Count)
             {
                 m_target = IN.m_wayPoints[m_curWayPoint].position;
