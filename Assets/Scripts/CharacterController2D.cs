@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class CharacterController2D : MonoBehaviour
     public Rigidbody2D rb;
     public Vector3 m_footOffset;
     public LayerMask Mask;
-
+    public Image m_lifePoint;
     private Animator m_animator;
     private RaycastHit2D hit;
 
@@ -28,7 +30,7 @@ public class CharacterController2D : MonoBehaviour
         OnAGround();
         CircleCast();
         m_animator.SetBool("IsGrounded", OnAGround());
-
+        LifeBar();
     }
 
     void FixedUpdate()
@@ -43,6 +45,12 @@ public class CharacterController2D : MonoBehaviour
             DestroyImmediate(gameObject);
         }
     }
+
+    void LifeBar()
+    {
+        m_lifePoint.fillAmount = (float)m_livingCharacter.m_lifePoint / (float)m_livingCharacter.m_maxLifePoint;
+    }
+
     void MyInput()
     {
         if (Input.GetButton("X_Axis"))

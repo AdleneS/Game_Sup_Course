@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_livingCharacter:
-    m_maxLifePoint: 1
-    m_lifePoint: 1
+    m_maxLifePoint: 5
+    m_lifePoint: 5
   m_jumpHeight: 5
   m_speed: 2
   m_damage: 1
@@ -162,6 +162,7 @@ MonoBehaviour:
   Mask:
     serializedVersion: 2
     m_Bits: 1536
+  m_lifePoint: {fileID: 0}
 --- !u!114 &114954562354927068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,7 +208,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300008, guid: bdf0bb5c417be424d92663648d8f7740, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -251,7 +252,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300018, guid: bdf0bb5c417be424d92663648d8f7740, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

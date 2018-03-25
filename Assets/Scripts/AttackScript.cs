@@ -21,7 +21,6 @@ public class AttackScript : MonoBehaviour {
                     Vector2.Dot(contact.normal, Vector2.left) > 0.8f ||
                     Vector2.Dot(contact.normal, Vector2.right) > 0.8f)
                 {
-                    Debug.Log(Vector2.Dot(contact.normal, Vector2.right));
                     Attack(collision.contacts[0].collider.gameObject, m_damage);
                 }
             }
