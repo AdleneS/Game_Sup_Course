@@ -52,12 +52,15 @@ public class CharacterController2D : MonoBehaviour
         IsAlive();
     }
 
-    void IsAlive()
+    public bool IsAlive()
     {
         if (m_livingCharacter.m_lifePoint<=0)
         {
-            Destroy(gameObject,1.0f);
+            Destroy(gameObject);
+            return false;
+
         }
+        return true;
     }
 
     void LifeBar()
@@ -116,6 +119,10 @@ public class CharacterController2D : MonoBehaviour
             m_coinTxt.text = m_coin.ToString();
             Destroy(collision.gameObject);
             AL.PlayOneShot(m_getCoin);
+        }
+        if (collision.name == "DeathZone")
+        {
+            m_livingCharacter.m_lifePoint = 0;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
