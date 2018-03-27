@@ -22,6 +22,7 @@ public class AttackScript : MonoBehaviour {
                     Vector2.Dot(contact.normal, Vector2.right) > 0.8f)
                 {
                     Attack(collision.contacts[0].collider.gameObject, m_damage);
+                    collision.transform.GetComponent<AudioSource>().PlayOneShot(collision.transform.GetComponent<CharacterController2D>().m_takeDammageSound);
                 }
             }
         }

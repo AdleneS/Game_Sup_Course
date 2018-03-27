@@ -10,16 +10,30 @@ public class CharacterController2D : MonoBehaviour
     public float m_jumpHeight = 4.0f;
     public float m_speed = 2.0f;
     public int  m_damage = 1;
+    public int m_coin = 0;
 
+
+    [Header("AudioList")]
+    public AudioClip m_jumpSound;
+    public AudioClip m_hitEnemySound;
+    public AudioClip m_takeDammageSound;
+    public AudioClip m_getCoin;
+
+
+    [Header("Components")]
     public Rigidbody2D rb;
     public Vector3 m_footOffset;
     public LayerMask Mask;
     public Image m_lifePoint;
+    public Text m_coinTxt;
+
+    private AudioSource AL;
     private Animator m_animator;
     private RaycastHit2D hit;
 
     void Start()
     {
+        AL = GetComponent<AudioSource>();
         m_animator = GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
@@ -42,7 +56,7 @@ public class CharacterController2D : MonoBehaviour
     {
         if (m_livingCharacter.m_lifePoint<=0)
         {
-            DestroyImmediate(gameObject);
+            Destroy(gameObject,1.0f);
         }
     }
 
@@ -66,6 +80,7 @@ public class CharacterController2D : MonoBehaviour
         if (Input.GetButton("Jump") && OnAGround())
         {
             Jump();
+            AL.PlayOneShot(m_jumpSound);
         }
 
         if (Input.GetAxis("X_Axis") >= 0)
@@ -93,6 +108,16 @@ public class CharacterController2D : MonoBehaviour
         target.GetComponent<Enemy>().m_livingCharacter.m_lifePoint -= damage;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Coin")
+        {
+            m_coin++;
+            m_coinTxt.text = m_coin.ToString();
+            Destroy(collision.gameObject);
+            AL.PlayOneShot(m_getCoin);
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -104,6 +129,7 @@ public class CharacterController2D : MonoBehaviour
             if (Vector2.Dot(contact.normal, Vector2.up) > 0.5f && collision.contacts[0].collider.gameObject.tag == "Enemy")
             {
                 kill = true;
+                AL.PlayOneShot(m_hitEnemySound);
 
                 if (Input.GetButton("Jump") && kill)
                 {
